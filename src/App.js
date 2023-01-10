@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes, Navigate } from "react-router-dom";
+// import Main from "./components/Main";
+import Signup from "./components/Singup";
+import Login from "./components/Login";
+import Home from "./pages/Home"
+import Services from "./pages/Services"
+import Career from "./pages/Career"
+import Aiintenship from "./pages/Aiintenship"
+import Products from "./pages/Products"
+import Blog from "./pages/Blog"
+
+import Admin from "./pages/Admin"
+
+
+import Contact from "./pages/Contact"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const user = localStorage.getItem("token");
+
+	return (
+		<>
+			<Routes>
+			{user && <Route path="/" exact element={<Home/>} />}
+			<Route path="/signup" exact element={<Signup />} />
+			<Route path="/login" exact element={<Login />} />
+			{/* <Route path="/home" exact element={<Main />} /> */}
+			<Route path="/services" exact element={<Services/>} />
+			<Route path="/products" exact element={<Products />} />
+			<Route path="/intenship" exact element={<Aiintenship />} />
+			<Route path="/career" exact element={<Career />} />
+			<Route path="/blog" exact element={<Blog />} />
+			<Route path="/admin" exact element={<Admin />} />
+			<Route path="/contactus" exact element={<Contact />} />
+			
+			<Route path="/" element={<Navigate replace to="/login" />} />
+		</Routes>
+		</>
+		
+	);
 }
 
 export default App;
